@@ -1,13 +1,76 @@
-name: 'Wait'
-description: 'Wait a designated number of milliseconds'
+name: 'APIM Action'
+description: 'Check APIM on new pull requests'
+author: '[Your Name]'
+
 inputs:
-  milliseconds:  # id of input
-    description: 'number of milliseconds to wait'
+  TENANT_ID:  # id of input
+    description: 'Api name'
+    required: false
+    default: ''
+  CLIENT_ID:
+    description: 'Api Policy Link'
     required: true
-    default: '1000'
-outputs:
-  time: # output will be available to future steps
-    description: 'The current time after waiting'
+    default: ''
+  CLIENT_SECRET:  # id of input
+    description: 'Api name'
+    required: false
+    default: ''
+  SUBSCRIPTION_ID:
+    description: 'Api Policy Link'
+    required: true
+    default: ''
+  RESOURCE_GROUP_NAME:  # id of input
+    description: 'Api name'
+    required: false
+    default: ''
+  APIM_SERVICE_NAME:
+    description: 'Api Policy Link'
+    required: true
+    default: ''
+  APIM_API_NAME:  # id of input
+    description: 'Api name'
+    required: false
+    default: ''
+  API_SPEC:
+    description: 'Api Policy Link'
+    required: true
+    default: ''
+  API_POLICY_LOCATION:  # id of input
+    description: 'Api name'
+    required: false
+    default: ''
+  AAD_ENDPOINT:
+    description: 'Api Policy Link'
+    required: true
+    default: ''
+  GRAPH_ENDPOINT:
+    description: 'Api Policy Link'
+    required: true
+    default: ''
+
 runs:
-  using: 'node16'
+  using: 'node12'
   main: 'dist/index.js'
+
+#  steps:
+#   - name: Checkout repository
+#      uses: actions/checkout@v2
+#    - name: Set up Node.js version
+#      uses: actions/setup-node@v3
+#      with:
+#        node-version: '16.x'
+#    - name: npm install and  build
+#      env:
+#        API_POLICY_LOCATION: ${{ inputs.apiPolicyLink }}
+#      shell: bash
+#      run: |
+#        npm install
+#        npm run build --if-present
+#    - name: node deploy
+#      env:
+#        REACT_APP_SITE_URL: ${{ secrets.APP_URL }}
+#        REACT_APP_API_BASE_URL: ${{ secrets.API_BASE_URL }}
+#        REACT_APP_AZURE_CLIENT_ID: ${{ secrets.AZURE_CLIENT_ID }}
+#      shell: bash
+#      run: |
+#        node dist/index.js

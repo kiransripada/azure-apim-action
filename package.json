@@ -1,35 +1,23 @@
 {
-  "name": "javascript-action",
+  "name": "demo-action-pull-request",
   "version": "1.0.0",
-  "description": "JavaScript Action Template",
-  "main": "index.js",
+  "description": "",
+  "main": "src/index.js",
   "scripts": {
-    "lint": "eslint .",
-    "prepare": "ncc build index.js -o dist --source-map --license licenses.txt",
-    "test": "jest",
-    "all": "npm run lint && npm run prepare && npm run test"
+    "build": "ncc build src/index.js -o dist && node dist/index.js"
   },
   "repository": {
-    "type": "git",
-    "url": "git+https://github.com/actions/javascript-action.git"
+    "type": "git"
   },
-  "keywords": [
-    "GitHub",
-    "Actions",
-    "JavaScript"
-  ],
-  "author": "",
   "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/actions/javascript-action/issues"
-  },
-  "homepage": "https://github.com/actions/javascript-action#readme",
-  "dependencies": {
-    "@actions/core": "^1.2.5"
-  },
+  "dependencies": {},
   "devDependencies": {
-    "@vercel/ncc": "^0.31.1",
-    "eslint": "^8.0.0",
-    "jest": "^27.2.5"
+    "@actions/core": "^1.2.6",
+    "@actions/github": "^4.0.0",
+    "@vercel/ncc": "^0.27.0",
+    "@azure/msal-node": "^1.9.1",
+    "axios": "^0.27.2",
+    "dotenv": "^16.0.1",
+    "yargs": "^17.5.1"
   }
 }

@@ -1,116 +1,65 @@
-# Create a JavaScript Action
-
+## Action to publish & promote APIs to Azure API-M
 <p align="center">
-  <a href="https://github.com/actions/javascript-action/actions"><img alt="javscript-action status" src="https://github.com/actions/javascript-action/workflows/units-test/badge.svg"></a>
+  <a href="#" src="#"></a>
 </p>
 
-Use this template to bootstrap the creation of a JavaScript action.:rocket:
+#### Use case 
+  - Enable self-service capabilities to publish & promote APIs to Azure API-M( using GitHub actions) .
+    - If you are new to API-M,[click here](https://azure.microsoft.com/en-us/services/api-management)
+ 
 
-This template includes tests, linting, a validation workflow, publishing, and versioning guidance.
 
-If you are new, there's also a simpler introduction.  See the [Hello World JavaScript Action](https://github.com/actions/hello-world-javascript-action)
-
-## Create an action from this template
-
-Click the `Use this Template` and provide the new repo details for your action
-
-## Code in Main
-
-Install the dependencies
-
-```bash
-npm install
+#### 2.Proposed Process
+```
+  - Enable self-service to publish & promote APIs to APIM( using GitHub actions) 
+  - Enable product teams to manage  publish and promotion to API-M as well
+  Note: This process complements the current process 
+```  
+##### 2.1 Details 
+ This action gives API developers ability to :
+```
+  - validate the API-Specification
+  - publish & promote APIs to API-M 
+  - create/update API policies
+  Note:Currently this process still in evaluation phase and only available in API-M **sandbox** environment only. 
+```
+##### 2.2 Usage
+You can now consume the action by referencing github branch(say main,apim) in your gh workflows yml
+```
+Sample #
+https://github.com//hello-world-svc/blob/main/.github/workflows/publish-to-apim.yml
 ```
 
-Run the tests :heavy_check_mark:
-
-```bash
-$ npm test
-
- PASS  ./index.test.js
-  ✓ throws invalid number (3ms)
-  ✓ wait 500 ms (504ms)
-  ✓ test runs (95ms)
-...
+##### 2.3 Configuration - Environment
+For publishing APIs to a specific API-M environment ,following environment configurations are needed
+```
+  TENANT_ID:445555-d9999-4900a-916123sd44
+  CLIENT_ID: ${{ secrets.CLIENT_ID }}
+  CLIENT_SECRET: ${{ secrets.CLIENT_SECRET }}
+  SUBSCRIPTION_ID:{SET_VALUE_HERE} //eg: 664AAAb36e0-XXXX-YYY-ZZZ-a2z1233
+  RESOURCE_GROUP_NAME:{SET_VALUE_HERE} //eg: my-sandbox-apim-001-rg
+  APIM_SERVICE_NAME:{SET_VALUE_HERE} //eg: my-sandbox-apim
+  AAD_ENDPOINT:  //eg: https://login.microsoftonline.com/
+  GRAPH_ENDPOINT:  //eg: https://management.azure.com/
 ```
 
-## Change action.yml
-
-The action.yml defines the inputs and output for your action.
-
-Update the action.yml with your name, description, inputs and outputs for your action.
-
-See the [documentation](https://help.github.com/en/articles/metadata-syntax-for-github-actions)
-
-## Change the Code
-
-Most toolkit and CI/CD operations involve async operations so the action is run in an async function.
-
-```javascript
-const core = require('@actions/core');
-...
-
-async function run() {
-  try {
-      ...
-  }
-  catch (error) {
-    core.setFailed(error.message);
-  }
-}
-
-run()
+##### 2.4 Configuration - Apis
+For publishing APIs to API-M environments ,following API specific inputs are needed.
+```
+  APIM_API_NAME:{YOUR_API_NAME} //eg: swaggerpetstore
+  API_SPEC: {YOUR_API_SPEC}//api-spec in {YOUR_GH_REPO}/docs location or openapi spec link,which is accessible eg: https://petstore3.swagger.io/api/v3/openapi.json 
+  API_POLICY_LOCATION: {YOUR_API_POLICY_XML} //api policy, present in {YOUR_GH_REPO}/docs location in  eg://https://github.com/hello-world-svc/blob/main/docs/api-policy.xml
 ```
 
-See the [toolkit documentation](https://github.com/actions/toolkit/blob/master/README.md#packages) for the various packages.
-
-## Package for distribution
-
-GitHub Actions will run the entry point from the action.yml. Packaging assembles the code into one file that can be checked in to Git, enabling fast and reliable execution and preventing the need to check in node_modules.
-
-Actions are run from GitHub repos.  Packaging the action will create a packaged action in the dist folder.
-
-Run prepare
-
-```bash
-npm run prepare
+#### 3. Next steps
+```
+ - Provide capability to manage NamedValues .
 ```
 
-Since the packaged index.js is run from the dist folder.
-
-```bash
-git add dist
+#### 4. Technical details
 ```
-
-## Create a release branch
-
-Users shouldn't consume the action from master since that would be latest code and actions can break compatibility between major versions.
-
-Checkin to the v1 release branch
-
-```bash
-git checkout -b v1
-git commit -a -m "v1 release"
+This action:
+ - uses Microsoft REST APIs to interact with Azure API-M 
+ - use OAuth2.0 ClientCredential flow to authenticate Azure API-M
+ - uses GitHub libraries to interact with GitHub
 ```
-
-```bash
-git push origin v1
-```
-
-Note: We recommend using the `--license` option for ncc, which will create a license file for all of the production node modules used in your project.
-
-Your action is now published! :rocket:
-
-See the [versioning documentation](https://github.com/actions/toolkit/blob/master/docs/action-versioning.md)
-
-## Usage
-
-You can now consume the action by referencing the v1 branch
-
-```yaml
-uses: actions/javascript-action@v1
-with:
-  milliseconds: 1000
-```
-
-See the [actions tab](https://github.com/actions/javascript-action/actions) for runs of this action! :rocket:

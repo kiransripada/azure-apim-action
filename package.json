@@ -13,7 +13,7 @@
   "dependencies": {},
   "devDependencies": {
     "@actions/core": "^1.2.6",
-    "@actions/github": "^4.0.0",
+    "@actions/github": "^5.1.1",
     "@vercel/ncc": "^0.27.0",
     "@azure/msal-node": "^1.9.1",
     "axios": "^0.27.2",
